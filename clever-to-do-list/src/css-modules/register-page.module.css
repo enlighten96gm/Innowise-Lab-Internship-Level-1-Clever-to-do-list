@@ -1,0 +1,66 @@
+.main {
+    width: 500px;
+    height: 450px;
+    background-color:navajowhite;
+    border-radius: 8px;
+    box-shadow: 10px 10px 10px 10px black;
+    display: flex;
+    flex-direction: column;
+}
+.wrapper {
+    margin: 0 10%;
+}
+.login__block {
+    margin-top: 80px;
+    margin-bottom: 30px;
+}
+.error__message {
+    margin-top: 3px;
+    color: darkred;
+    font-size: 10px;
+}
+.login__block__text, .password__block__text {
+    margin: 10px 0;
+}
+.login__block__input, .password__block__input {
+    width: 100%;
+    height: 40px;
+    background-color: black;
+    border-radius: 8px;
+    outline: none;
+    font-size: 15px;
+    font-family: inherit;
+    color:white;
+    cursor: pointer;
+}
+.button__block {
+    margin-top: 30px;
+}
+.button__block__Login {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    outline: none;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-family: inherit;
+    cursor: pointer;
+}
+.button__block__Login:active {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+}
+.button__block__Register {
+    margin-top: 20px;
+    text-align: end;
+    width: 100%;
+    cursor: pointer;
+}
+.button__block__Register:hover {
+    color: rgb(255, 0, 0);
+}

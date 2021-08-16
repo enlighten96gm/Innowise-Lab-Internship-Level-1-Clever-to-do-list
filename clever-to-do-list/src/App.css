@@ -2,3 +2,19 @@
   margin: 0;
   padding: 0;
 }
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Press Start 2P', cursive;
+  background-color: cadetblue;
+}
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 762px;
+  height: 920px;
+  max-width: 762px;
+  background-color: cadetblue;
+}
