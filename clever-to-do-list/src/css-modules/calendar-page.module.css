@@ -18,3 +18,37 @@
     color: rgb(255, 0, 0);
     cursor: pointer;
 }
+.carousel {
+    position: relative;
+    margin-top: 40px;
+    overflow: hidden;
+}
+.inside__carousel {
+    right: 0px;
+    align-items: center;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(1000, auto);
+    gap: 15px;
+    width: 100%;
+    height: 150px;
+}
+.single {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 155px;
+    height: 95%;
+    background-color: blanchedalmond;
+    border: 2px solid black;
+    border-radius: 12px;
+    box-shadow: 5px 1px 1px 1px black;
+}
+.string__date {
+    margin-top: 5px;
+    font-size: 20px;
+}
+.number__date {
+    margin-top: 40px;
+    font-size: 20px;
+}
