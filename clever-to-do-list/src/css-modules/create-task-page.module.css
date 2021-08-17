@@ -11,47 +11,20 @@
 .header {
     display: flex;
 }
-.signout__button {
-    margin-left: 50%;
-}
-.signout__button:hover {
-    color: rgb(255, 0, 0);
+.return {
     cursor: pointer;
 }
-.carousel {
+.return::before {
     position: relative;
-    user-select: none;
-    margin-top: 40px;
-    overflow: hidden;
+    content: '<<<?';
+    left: 0px;
+    font-size: 18px;
 }
-.inside__carousel {
-    user-select: none;
-    right: 0px;
-    align-items: center;
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(30, auto);
-    gap: 15px;
-    /* width: 100%; */
-    height: 150px;
+.return:hover {
+    color: rgb(255, 0, 0);
 }
-.single {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    width: 155px;
-    height: 95%;
-    background-color: blanchedalmond;
-    border: 2px solid black;
-    border-radius: 12px;
-    box-shadow: 5px 1px 1px 1px black;
-}
-.string__date {
-    margin-top: 5px;
-    font-size: 20px;
-}
-.number__date {
-    margin-top: 40px;
+.header__text {
+    margin-left: 120px;
     font-size: 20px;
 }
 .task__container {
@@ -96,25 +69,45 @@
     background-color: #000000;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
 }
-.add__task_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.task__container_label {
+    margin-left: 20px;
 }
-.add__task_btn {
-    cursor: pointer;
-    margin-top: 70px;
-    width: 40%;
+.create__task_button {
+    width: 20%;
+    padding-top: 10px;
     height: 30px;
-    padding-top: 15px;
     text-align: center;
     background-color: cadetblue;
     border: 2px solid black;
     border-radius: 12px;
     box-shadow: 5px 1px 1px 1px black;
+    cursor: pointer;
 }
-.add__task_btn:hover {
-    color: rgb(223, 103, 103);
+.task__button_container {
+    position: absolute;
+    margin-left: 52%;
+    gap: 10px;
+    display: flex;
+    float: right;
 }
-
+.task__container__update {
+    cursor: pointer;
+    color: rgb(13, 139, 13);
+}
+.task__container__delete {
+    cursor: pointer;
+    color: rgb(216, 83, 83);
+}
+.create__task_input {
+    margin-top: 50px;
+    width: 100%;
+    height: 40px;
+    background-color: black;
+    border-radius: 8px;
+    outline: none;
+    font-size: 15px;
+    font-family: inherit;
+    color:white;
+    cursor: pointer;
+}
 

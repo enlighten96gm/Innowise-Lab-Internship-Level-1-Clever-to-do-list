@@ -14,7 +14,10 @@ body {
   justify-content: center;
   align-items: center;
   width: 762px;
-  height: 920px;
+  height: 910px;
   max-width: 762px;
   background-color: cadetblue;
+}
+.active {
+  background-color: green;
 }

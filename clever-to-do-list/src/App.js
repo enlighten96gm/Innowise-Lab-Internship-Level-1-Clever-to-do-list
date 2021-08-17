@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import './App.css';
 import CalendarPage from './components/calendar';
+import CreateTaskPage from './components/create-task-page';
 import LoginPage from './components/login-page';
 import RegisterPage from './components/register-page';
 import fireBase from './fire';
-import { CALENDAR_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE } from './utils/routes';
+import { CALENDAR_ROUTE, CREATE_TASK_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE } from './utils/routes';
 
 const App = () => {
   const [user, setUser] = useState('')
   const [logInUp, setLogInUp] = useState(false)
+  const [createTask, setCreateTask] = useState(false)
   const [isAuth, setIsAuth] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -22,6 +24,13 @@ const App = () => {
       setLogInUp(false)
     } else {
       setLogInUp(true)
+    }
+  }
+  const calendarTaskSwitcher = () => {
+    if (createTask) {
+      setCreateTask(false)
+    } else {
+      setCreateTask(true)
     }
   }
   const clearInput = () => {
@@ -97,7 +106,8 @@ useEffect(() => {
       {user === ''
       ?
       <Switch>
-        <Route path={logInUp === false ? LOGIN_ROUTE : REGISTER_ROUTE} render={() => 
+        <Route path={logInUp === false ? LOGIN_ROUTE : REGISTER_ROUTE} 
+        render={() => 
         logInUp === false
         ?
         <LoginPage 
@@ -126,8 +136,22 @@ useEffect(() => {
       </Switch>
       :
       <Switch>
-        <Route path={CALENDAR_ROUTE} render={() => <CalendarPage logOutHandler={logOutHandler}/> } />
-        <Redirect to={CALENDAR_ROUTE} />
+        <Route path={createTask === false ? CALENDAR_ROUTE : CREATE_TASK_ROUTE} 
+        render={() =>
+        createTask === false
+        ?
+        <CalendarPage 
+        logOutHandler={logOutHandler}
+        calendarTaskSwitcher={calendarTaskSwitcher}
+        user={user}
+        />
+        :
+        <CreateTaskPage
+        calendarTaskSwitcher={calendarTaskSwitcher}
+        user={user}
+        />
+        } />
+        <Redirect to={createTask === false ? CALENDAR_ROUTE : CREATE_TASK_ROUTE} />
       </Switch>
       }
       </BrowserRouter>
