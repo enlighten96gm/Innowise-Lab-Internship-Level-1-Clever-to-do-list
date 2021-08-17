@@ -17,6 +17,7 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
+  let [day, setDay] = useState('')
 
   const LoginRegisterSwitcher = () => {
     clearInput()

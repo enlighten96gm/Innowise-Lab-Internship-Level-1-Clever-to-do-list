@@ -47,10 +47,12 @@
     box-shadow: 5px 1px 1px 1px black;
 }
 .string__date {
+    pointer-events: none;
     margin-top: 5px;
     font-size: 20px;
 }
 .number__date {
+    pointer-events: none;
     margin-top: 40px;
     font-size: 20px;
 }
