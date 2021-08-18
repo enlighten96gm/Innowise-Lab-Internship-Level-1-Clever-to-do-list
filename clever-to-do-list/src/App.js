@@ -18,6 +18,13 @@ const App = () => {
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
   let [day, setDay] = useState('')
+  const [userInfo, setUserInfo] = useState('')
+  const [inputRender, setInputRender] = useState('')
+  const currentDatTasks = []
+  const currentTaskForDelete = []
+  const [tasksCount, setTasksCount] = useState(0)
+  const [restore, setRestore] = useState('')
+  const today = (new Date()).getDate()
 
   const LoginRegisterSwitcher = () => {
     clearInput()
@@ -99,8 +106,31 @@ const authObserver = () => {
 }
 useEffect(() => {
   authObserver()
-}, [])
-
+}, [user])
+useEffect( async () => {
+  await fireBase.database().ref().child(`${user.uid}`).once('value').then(function(task) {
+    setUserInfo(task.val())
+  })
+}, [day, user, inputRender, restore])
+useEffect(() => {
+  if (userInfo) {
+    for (let key of Object.entries(userInfo)) {
+      if (day === key[0]) {
+          if (Object.keys(key[1]).length !== 0) {}
+          setTasksCount(Object.keys(key[1]).length)
+          for (let entries of Object.entries(key[1])) {
+              const singleTaskData = Object.values(entries)[1]
+              const singleTaskForDelete = Object.entries(entries)
+              currentTaskForDelete.push(singleTaskForDelete)
+              currentDatTasks.push(singleTaskData)
+          }
+      }
+      if (!Object.keys(userInfo).includes(day)) {
+          setTasksCount(0)
+      }
+  }
+  }  
+}, [day, userInfo, createTask, restore])
   return (
     <div className='root'>
       <BrowserRouter>
@@ -145,11 +175,23 @@ useEffect(() => {
         logOutHandler={logOutHandler}
         calendarTaskSwitcher={calendarTaskSwitcher}
         user={user}
+        setDay={setDay}
+        day={day}
+        userInfo={userInfo}
+        tasksCount={tasksCount}
+        currentDatTasks={currentDatTasks}
         />
         :
         <CreateTaskPage
         calendarTaskSwitcher={calendarTaskSwitcher}
         user={user}
+        day={day}
+        setInputRender={setInputRender}
+        tasksCount={tasksCount}
+        currentDatTasks={currentDatTasks}
+        setRestore={setRestore}
+        restore={restore}
+        currentTaskForDelete={currentTaskForDelete}
         />
         } />
         <Redirect to={createTask === false ? CALENDAR_ROUTE : CREATE_TASK_ROUTE} />

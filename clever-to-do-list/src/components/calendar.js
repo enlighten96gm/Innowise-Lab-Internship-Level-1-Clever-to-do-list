@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react'
 import css from '../css-modules/calendar-page.module.css'
 import getDate from '../functions/get-date'
 import SingleDateComponent from './single-date-component'
+import SingleTaskComponent from './singleTaskComponent'
 
-const CalendarPage = ({logOutHandler, calendarTaskSwitcher, user}) => {
+const CalendarPage = ({logOutHandler, calendarTaskSwitcher, user, setDay, day, userInfo, tasksCount, currentDatTasks}) => {
     const [dateArray, setDateArray] = useState(getDate())
+    const [render, setRender] = useState('')
+    
     let sliderState = {
         pressed: false,
         startX: '',
@@ -16,8 +19,14 @@ const CalendarPage = ({logOutHandler, calendarTaskSwitcher, user}) => {
     }
     let {pressed, startX, x, firstPos, dragged, currentPosition, firstTouch} = sliderState
     const singleCalendarComponent = dateArray.map(item => {
-        return <SingleDateComponent item={item}/>
+        return <SingleDateComponent item={item} setDay={setDay} day={day} userInfo={userInfo}/>
     })
+    let singleTaskElement = currentDatTasks.map(item => {
+        return <SingleTaskComponent item={item}/>
+    })
+    useEffect(() => {
+        setRender(render + 'a')
+    }, [day, user, userInfo, tasksCount])
     useEffect(() => {
         const slider = document.querySelector(`.${css.carousel}`)
         const innerSlider = document.querySelector(`.${css.inside__carousel}`)
@@ -65,15 +74,9 @@ const CalendarPage = ({logOutHandler, calendarTaskSwitcher, user}) => {
                     </div>
                 </div>
                 <div className={css.task__container}>
-                    <div className={css.task__container_text}>5 Tasks Today?!</div>
+                    <div className={css.task__container_text}>{tasksCount} Tasks Today?!</div>
                     {/* от сель */}
-                    <div className={css.task__container_task}>
-                        <div className={css.custom__checkbox__container}>
-                            <input className={css.custom__checkbox} id='checkbox' type='checkbox' />
-                            <label for='checkbox'></label>
-                        </div>
-                        <div>Pay bills</div>
-                    </div>
+                    {singleTaskElement}
                     {/* до сель будет повторяться от пропсов */}
 
                 </div>

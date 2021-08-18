@@ -1,22 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import css from '../css-modules/create-task-page.module.css'
 import fireBase from '../fire'
+import SingleCreateTaskComponent from './single-create-task-component'
 
-const CreateTaskPage = ({calendarTaskSwitcher, user}) => {
+const CreateTaskPage = ({calendarTaskSwitcher, user, day, setInputRender, tasksCount, currentDatTasks, setRestore, restore, currentTaskForDelete}) => {
     const [task, setTask] = useState('')
-    let [taskCounter, setTaskCounter] = useState(0)
-    let [day, setDay] = useState(0)
+    let singleCreateTaskElement = currentTaskForDelete.map(item => {
+        return <SingleCreateTaskComponent item={item} user={user} day={day} task={task}/>
+    })
     const handleUser = async () => {
-        await fireBase.database().ref(`${user.uid}/` + `Monday/` + taskCounter).set({
+        await fireBase.database().ref(`${user.uid}/` + `${day}/` + `task:${tasksCount}`).set({
             task: task,
         })
         setTask('')
-        setTaskCounter( taskCounter += 1)
-        setDay(day += 1)
+        setInputRender(task)
+        setRestore(restore += 1)
     }
     const handleInputChange = (e) => {
         setTask(e.target.value)
     }
+    useEffect(() => {
+    }, [task, user, setInputRender, restore, currentDatTasks])
     return (
         <div className={css.main}>
             <div className={css.wrapper}>
@@ -26,18 +30,7 @@ const CreateTaskPage = ({calendarTaskSwitcher, user}) => {
                 </div>
                 <div className={css.task__container}>
                     {/* от сель */}
-                    <div className={css.task__container_task}>
-                        <div className={css.custom__checkbox__container}>
-                            <input className={css.custom__checkbox} id='checkbox' type='checkbox' />
-                            <label for='checkbox'></label>
-                        </div>
-                        <div className={css.task__container_label}>Pay bills</div>
-                        <div className={css.task__button_container}>
-                            <div className={css.task__container__update}>Update</div>
-                            <span>||</span>
-                            <div className={css.task__container__delete}>Delete</div>
-                        </div>
-                    </div>
+                    {singleCreateTaskElement}
                     {/* до сель будет повторяться от пропсов */}
                 </div>
                 <div>

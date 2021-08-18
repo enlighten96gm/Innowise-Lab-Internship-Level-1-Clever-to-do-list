@@ -118,5 +118,9 @@
 .add__task_btn:hover {
     color: rgb(223, 103, 103);
 }
+.task__dots {
+    pointer-events: none;
+    margin-top: 30px;
+}
 
 
