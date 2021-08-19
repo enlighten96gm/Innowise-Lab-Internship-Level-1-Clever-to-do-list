@@ -1,26 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import css from '../css-modules/create-task-page.module.css'
-import fireBase from '../fire'
+import firebaseApi from '../utils/firebase-api'
 import SingleCreateTaskComponent from './single-create-task-component'
 
-const CreateTaskPage = ({calendarTaskSwitcher, user, day, setInputRender, tasksCount, currentDatTasks, setRestore, restore, currentTaskForDelete}) => {
+const CreateTaskPage = ({calendarTaskSwitcher, user, day, setInputRender, tasksCount, setRestore, restore, checkArr}) => {
     const [task, setTask] = useState('')
-    let singleCreateTaskElement = currentTaskForDelete.map(item => {
-        return <SingleCreateTaskComponent item={item} user={user} day={day} task={task}/>
+    const singleCreateTaskElement = checkArr.map(item => {
+        return <SingleCreateTaskComponent item={item} user={user} day={day} task={task}setRestore={setRestore} restore={restore}/>
     })
     const handleUser = async () => {
-        await fireBase.database().ref(`${user.uid}/` + `${day}/` + `task:${tasksCount}`).set({
-            task: task,
-        })
-        setTask('')
-        setInputRender(task)
-        setRestore(restore += 1)
+        if (!!task) {
+            await firebaseApi.addNewTask(user, day, tasksCount, task)
+            setTask('')
+            setInputRender(task)
+        }
     }
     const handleInputChange = (e) => {
         setTask(e.target.value)
     }
-    useEffect(() => {
-    }, [task, user, setInputRender, restore, currentDatTasks])
     return (
         <div className={css.main}>
             <div className={css.wrapper}>
@@ -29,9 +26,7 @@ const CreateTaskPage = ({calendarTaskSwitcher, user, day, setInputRender, tasksC
                     <div className={css.header__text}>Today's Task. . .</div>
                 </div>
                 <div className={css.task__container}>
-                    {/* от сель */}
                     {singleCreateTaskElement}
-                    {/* до сель будет повторяться от пропсов */}
                 </div>
                 <div>
                     <div onClick={handleUser} className={css.create__task_button}>Create</div>

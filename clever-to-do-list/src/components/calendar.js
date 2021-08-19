@@ -4,10 +4,8 @@ import getDate from '../functions/get-date'
 import SingleDateComponent from './single-date-component'
 import SingleTaskComponent from './singleTaskComponent'
 
-const CalendarPage = ({logOutHandler, calendarTaskSwitcher, user, setDay, day, userInfo, tasksCount, currentDatTasks}) => {
+const CalendarPage = ({logOutHandler, calendarTaskSwitcher, user, setDay, day, userInfo, tasksCount, currentTaskState, createTask, checkArr}) => {
     const [dateArray, setDateArray] = useState(getDate())
-    const [render, setRender] = useState('')
-    
     let sliderState = {
         pressed: false,
         startX: '',
@@ -21,12 +19,9 @@ const CalendarPage = ({logOutHandler, calendarTaskSwitcher, user, setDay, day, u
     const singleCalendarComponent = dateArray.map(item => {
         return <SingleDateComponent item={item} setDay={setDay} day={day} userInfo={userInfo}/>
     })
-    let singleTaskElement = currentDatTasks.map(item => {
-        return <SingleTaskComponent item={item}/>
+    let singleTaskElement = checkArr.map(item => {
+        return <SingleTaskComponent key={Object.values(item[1][1])[1]} item={item} user={user} day={day}/>
     })
-    useEffect(() => {
-        setRender(render + 'a')
-    }, [day, user, userInfo, tasksCount])
     useEffect(() => {
         const slider = document.querySelector(`.${css.carousel}`)
         const innerSlider = document.querySelector(`.${css.inside__carousel}`)
@@ -75,10 +70,7 @@ const CalendarPage = ({logOutHandler, calendarTaskSwitcher, user, setDay, day, u
                 </div>
                 <div className={css.task__container}>
                     <div className={css.task__container_text}>{tasksCount} Tasks Today?!</div>
-                    {/* от сель */}
                     {singleTaskElement}
-                    {/* до сель будет повторяться от пропсов */}
-
                 </div>
                     <div className={css.add__task_container}>
                         <div onClick={calendarTaskSwitcher} className={css.add__task_btn}>Add a New Task</div>

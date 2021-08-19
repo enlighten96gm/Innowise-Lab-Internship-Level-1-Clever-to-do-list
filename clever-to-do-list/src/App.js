@@ -6,13 +6,13 @@ import CreateTaskPage from './components/create-task-page';
 import LoginPage from './components/login-page';
 import RegisterPage from './components/register-page';
 import fireBase from './fire';
+import firebaseApi from './utils/firebase-api';
 import { CALENDAR_ROUTE, CREATE_TASK_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE } from './utils/routes';
 
 const App = () => {
   const [user, setUser] = useState('')
   const [logInUp, setLogInUp] = useState(false)
   const [createTask, setCreateTask] = useState(false)
-  const [isAuth, setIsAuth] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [emailError, setEmailError] = useState('')
@@ -24,6 +24,8 @@ const App = () => {
   const currentTaskForDelete = []
   const [tasksCount, setTasksCount] = useState(0)
   const [restore, setRestore] = useState('')
+  let [checkArr, setCheckArr] = useState('')
+  let [currentTaskState, setCurrentTaskState] = useState('')
   const today = (new Date()).getDate()
 
   const LoginRegisterSwitcher = () => {
@@ -97,20 +99,16 @@ const authObserver = () => {
     if (user) {
       clearInput()
       setUser(user)
-      setIsAuth(true)
     } else {
       setUser('')
-      setIsAuth(false)
     }
   })
 }
 useEffect(() => {
   authObserver()
 }, [user])
-useEffect( async () => {
-  await fireBase.database().ref().child(`${user.uid}`).once('value').then(function(task) {
-    setUserInfo(task.val())
-  })
+useEffect(() => {
+  firebaseApi.getData(user, setUserInfo)
 }, [day, user, inputRender, restore])
 useEffect(() => {
   if (userInfo) {
@@ -129,8 +127,10 @@ useEffect(() => {
           setTasksCount(0)
       }
   }
-  }  
-}, [day, userInfo, createTask, restore])
+  }
+  setCheckArr(currentTaskForDelete)
+  setCurrentTaskState(currentDatTasks)
+}, [day, userInfo, createTask, restore, user])
   return (
     <div className='root'>
       <BrowserRouter>
@@ -179,7 +179,9 @@ useEffect(() => {
         day={day}
         userInfo={userInfo}
         tasksCount={tasksCount}
-        currentDatTasks={currentDatTasks}
+        currentTaskState={currentTaskState}
+        createTask={createTask}
+        checkArr={checkArr}
         />
         :
         <CreateTaskPage
@@ -188,10 +190,9 @@ useEffect(() => {
         day={day}
         setInputRender={setInputRender}
         tasksCount={tasksCount}
-        currentDatTasks={currentDatTasks}
         setRestore={setRestore}
         restore={restore}
-        currentTaskForDelete={currentTaskForDelete}
+        checkArr={checkArr}
         />
         } />
         <Redirect to={createTask === false ? CALENDAR_ROUTE : CREATE_TASK_ROUTE} />
