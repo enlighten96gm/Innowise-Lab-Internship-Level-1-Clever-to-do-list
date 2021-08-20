@@ -21,7 +21,7 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
-  let [day, setDay] = useState(((new Date()).getDate()).toString())
+  let [day, setDay] = useState(((new Date()).getDate(1)).toString())
   const [userInfo, setUserInfo] = useState('')
   const [inputRender, setInputRender] = useState('')
   const currentTaskForDelete = []

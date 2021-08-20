@@ -1,4 +1,4 @@
-const getDate = () => {
+const getDate = (argument) => {
     const today = new Date();
 
     const year = today.getFullYear();
@@ -6,7 +6,7 @@ const getDate = () => {
     const date = today.getDate();
     const days = []
 
-    for(var i=0; i<30; i++){
+    for(var i=0; i<argument; i++){
         const singleDay = new Date(year, month, date + i)
         days.push(singleDay.toDateString())
     }

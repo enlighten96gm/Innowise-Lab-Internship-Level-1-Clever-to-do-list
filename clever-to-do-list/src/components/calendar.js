@@ -8,7 +8,8 @@ import SingleTaskComponent from './singleTaskComponent'
 const CalendarPage = ({
 logOutHandler, calendarTaskSwitcher, user, setDay, day, userInfo, tasksCount, checkArr, setRestore, restore, loader
 }) => {
-    const [dateArray, setDateArray] = useState(getDate())
+    const [dateArray, setDateArray] = useState(getDate(30))
+    const [flag, setFlag] = useState(false)
     let sliderState = {
         pressed: false,
         startX: '',
@@ -27,6 +28,13 @@ pressed, startX, x, firstPos, dragged, currentPosition, firstTouch
     let singleTaskElement = checkArr.map((item, index) => {
         return <SingleTaskComponent key={index} item={item} user={user} day={day} setRestore={setRestore} restore={restore}/>
     })
+    useEffect(() => {
+        if (flag) {
+            setDateArray(getDate(60))
+        } else {
+            setDateArray(getDate(30))
+        }
+    }, [flag])
     useEffect(() => {
         const slider = document.querySelector(`.${css.carousel}`)
         const innerSlider = document.querySelector(`.${css.inside__carousel}`)
@@ -54,6 +62,11 @@ pressed, startX, x, firstPos, dragged, currentPosition, firstTouch
             if (parseInt(innerSlider.style.left) > 0) {
                 innerSlider.style.left = '0px'
             } 
+            if (innerSlider.getBoundingClientRect().right < -3850) {
+                setFlag(true)
+            } else  if (innerSlider.getBoundingClientRect().right < -3750) {
+                setFlag(false)
+            }
         })
         slider.addEventListener('touchmove', (e) => {
             if (!pressed) return;

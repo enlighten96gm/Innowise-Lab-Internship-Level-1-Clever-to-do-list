@@ -30,7 +30,7 @@
     align-items: center;
     position: relative;
     display: grid;
-    grid-template-columns: repeat(30, auto);
+    grid-template-columns: repeat(60, auto);
     gap: 15px;
     /* width: 100%; */
     height: 150px;
