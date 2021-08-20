@@ -182,6 +182,8 @@ useEffect(() => {
         currentTaskState={currentTaskState}
         createTask={createTask}
         checkArr={checkArr}
+        setRestore={setRestore}
+        restore={restore}
         />
         :
         <CreateTaskPage

@@ -41,7 +41,7 @@
 }
 .custom__checkbox {
     position: absolute;
-    z-index: -1;
+    z-index: 1;
     opacity: 0;
 }
 .custom__checkbox+label {

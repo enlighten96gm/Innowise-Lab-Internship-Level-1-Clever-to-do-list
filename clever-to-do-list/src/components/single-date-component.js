@@ -6,11 +6,14 @@ const SingleDateComponent = ({item, setDay, day, userInfo}) => {
     const dateToArray = item.split(' ')
     const active = {backgroundColor: 'red'}
     let [dotsArray, setDotsArray] = useState([])
-    let checkLength = 0
     const handleDotsCount = (argument) => {
         const arr = []
-        for (let i = 0; i < argument; i += 1) {
-            arr.push(<SingleDotComponent />)
+        if (Object.keys(argument).length > 4) {
+            arr.push(Object.keys(argument).length + '+')
+        } else {
+            for (let value of Object.values(argument)) {
+                arr.push(<SingleDotComponent value={value}/>)
+            }
         }
         return arr
     }
@@ -36,8 +39,7 @@ const SingleDateComponent = ({item, setDay, day, userInfo}) => {
         if (userInfo) {
             Object.entries(userInfo).forEach((item) => {
                 if (item[0] === dateToArray[2]) {
-                    checkLength = Object.keys(item[1]).length
-                    setDotsArray(handleDotsCount(checkLength))
+                    setDotsArray(handleDotsCount(item[1]))
                 }
             })
         }  

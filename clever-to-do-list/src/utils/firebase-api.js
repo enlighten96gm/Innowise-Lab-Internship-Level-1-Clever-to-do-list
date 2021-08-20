@@ -28,7 +28,6 @@ const firebaseApi = {
         const response = await fireBase.database().ref(`${user.uid}/` + `${day}/` + `${item[0][1]}`).update({
             checked: checker,
         })
-        console.log(response);
         return response
     }
 }

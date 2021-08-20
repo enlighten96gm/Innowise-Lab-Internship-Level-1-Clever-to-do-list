@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react'
 import css from '../css-modules/calendar-page.module.css'
 import firebaseApi from '../utils/firebase-api';
 
-const SingleTaskComponent = ({item, user, day}) => {
-    // console.log(Object.values(item));
-    const handleCheckboxSwitch = () => {
-        firebaseApi.updateCheckbox(user, day, item, 'true')
+const SingleTaskComponent = ({item, user, day, setRestore, restore}) => {
+    const handleCheckboxSwitch = (e) => {
+        if (e.target.checked === true) {
+            firebaseApi.updateCheckbox(user, day, item, 'true')
+        } else {
+            firebaseApi.updateCheckbox(user, day, item, '')
+        }
+        setRestore(restore += 'a')
     }
     // не проходит рендер
     // скорее всего айдишнику нужно бдует задать еще и дополнительно значение конкретного дня иначе они совпадают и начинается мясо

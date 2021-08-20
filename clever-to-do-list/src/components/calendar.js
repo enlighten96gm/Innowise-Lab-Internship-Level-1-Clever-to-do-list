@@ -4,7 +4,7 @@ import getDate from '../functions/get-date'
 import SingleDateComponent from './single-date-component'
 import SingleTaskComponent from './singleTaskComponent'
 
-const CalendarPage = ({logOutHandler, calendarTaskSwitcher, user, setDay, day, userInfo, tasksCount, currentTaskState, createTask, checkArr}) => {
+const CalendarPage = ({logOutHandler, calendarTaskSwitcher, user, setDay, day, userInfo, tasksCount, currentTaskState, createTask, checkArr, setRestore, restore}) => {
     const [dateArray, setDateArray] = useState(getDate())
     let sliderState = {
         pressed: false,
@@ -20,7 +20,7 @@ const CalendarPage = ({logOutHandler, calendarTaskSwitcher, user, setDay, day, u
         return <SingleDateComponent item={item} setDay={setDay} day={day} userInfo={userInfo}/>
     })
     let singleTaskElement = checkArr.map(item => {
-        return <SingleTaskComponent key={Object.values(item[1][1])[1]} item={item} user={user} day={day}/>
+        return <SingleTaskComponent key={Object.values(item[1][1])[1]} item={item} user={user} day={day} setRestore={setRestore} restore={restore}/>
     })
     useEffect(() => {
         const slider = document.querySelector(`.${css.carousel}`)
