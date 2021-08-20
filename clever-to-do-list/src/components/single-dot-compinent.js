@@ -8,7 +8,6 @@ const SingleDotComponent = ({value}) => {
         } else {
             setIfActiveDotFlag(false)
         }
-        console.log(value.checked);
     }, [])
 
     return (

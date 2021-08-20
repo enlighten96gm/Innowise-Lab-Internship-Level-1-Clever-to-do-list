@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
+import {
+ BrowserRouter, Redirect, Route, Switch 
+} from 'react-router-dom'
 import './App.css';
 import CalendarPage from './components/calendar';
 import CreateTaskPage from './components/create-task-page';
@@ -7,7 +9,9 @@ import LoginPage from './components/login-page';
 import RegisterPage from './components/register-page';
 import fireBase from './fire';
 import firebaseApi from './utils/firebase-api';
-import { CALENDAR_ROUTE, CREATE_TASK_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE } from './utils/routes';
+import {
+ CALENDAR_ROUTE, CREATE_TASK_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE 
+} from './utils/routes';
 
 const App = () => {
   const [user, setUser] = useState('')
@@ -17,16 +21,14 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
-  let [day, setDay] = useState('')
+  let [day, setDay] = useState(((new Date()).getDate()).toString())
   const [userInfo, setUserInfo] = useState('')
   const [inputRender, setInputRender] = useState('')
-  const currentDatTasks = []
   const currentTaskForDelete = []
   const [tasksCount, setTasksCount] = useState(0)
   const [restore, setRestore] = useState('')
   let [checkArr, setCheckArr] = useState('')
-  let [currentTaskState, setCurrentTaskState] = useState('')
-  const today = (new Date()).getDate()
+  // const today = (new Date()).getDate()
 
   const LoginRegisterSwitcher = () => {
     clearInput()
@@ -113,14 +115,12 @@ useEffect(() => {
 useEffect(() => {
   if (userInfo) {
     for (let key of Object.entries(userInfo)) {
+      console.log(key, day);
       if (day === key[0]) {
-          if (Object.keys(key[1]).length !== 0) {}
-          setTasksCount(Object.keys(key[1]).length)
+          if (Object.keys(key[1]).length !== 0) setTasksCount(Object.keys(key[1]).length)
           for (let entries of Object.entries(key[1])) {
-              const singleTaskData = Object.values(entries)[1]
-              const singleTaskForDelete = Object.entries(entries)
+            const singleTaskForDelete = Object.entries(entries)
               currentTaskForDelete.push(singleTaskForDelete)
-              currentDatTasks.push(singleTaskData)
           }
       }
       if (!Object.keys(userInfo).includes(day)) {
@@ -129,7 +129,6 @@ useEffect(() => {
   }
   }
   setCheckArr(currentTaskForDelete)
-  setCurrentTaskState(currentDatTasks)
 }, [day, userInfo, createTask, restore, user])
   return (
     <div className='root'>
@@ -179,8 +178,6 @@ useEffect(() => {
         day={day}
         userInfo={userInfo}
         tasksCount={tasksCount}
-        currentTaskState={currentTaskState}
-        createTask={createTask}
         checkArr={checkArr}
         setRestore={setRestore}
         restore={restore}

@@ -4,7 +4,10 @@ import getDate from '../functions/get-date'
 import SingleDateComponent from './single-date-component'
 import SingleTaskComponent from './singleTaskComponent'
 
-const CalendarPage = ({logOutHandler, calendarTaskSwitcher, user, setDay, day, userInfo, tasksCount, currentTaskState, createTask, checkArr, setRestore, restore}) => {
+const CalendarPage = ({
+logOutHandler, calendarTaskSwitcher, user, setDay, day, userInfo, tasksCount, checkArr, setRestore, restore
+}) => {
+    // console.log(checkArr);
     const [dateArray, setDateArray] = useState(getDate())
     let sliderState = {
         pressed: false,
@@ -15,12 +18,14 @@ const CalendarPage = ({logOutHandler, calendarTaskSwitcher, user, setDay, day, u
         currentPosition: '',
         firstTouch: ''
     }
-    let {pressed, startX, x, firstPos, dragged, currentPosition, firstTouch} = sliderState
-    const singleCalendarComponent = dateArray.map(item => {
-        return <SingleDateComponent item={item} setDay={setDay} day={day} userInfo={userInfo}/>
+    let {
+pressed, startX, x, firstPos, dragged, currentPosition, firstTouch
+} = sliderState
+    const singleCalendarComponent = dateArray.map((item, index) => {
+        return <SingleDateComponent key={index} item={item} setDay={setDay} day={day} userInfo={userInfo}/>
     })
-    let singleTaskElement = checkArr.map(item => {
-        return <SingleTaskComponent key={Object.values(item[1][1])[1]} item={item} user={user} day={day} setRestore={setRestore} restore={restore}/>
+    let singleTaskElement = checkArr.map((item, index) => {
+        return <SingleTaskComponent key={index} item={item} user={user} day={day} setRestore={setRestore} restore={restore}/>
     })
     useEffect(() => {
         const slider = document.querySelector(`.${css.carousel}`)
@@ -35,10 +40,10 @@ const CalendarPage = ({logOutHandler, calendarTaskSwitcher, user, setDay, day, u
             firstTouch = e.touches[0].clientX
             startX = e.touches[0].clientX - innerSlider.offsetLeft
         })
-        window.addEventListener('mouseup', (e) => {
+        window.addEventListener('mouseup', () => {
             pressed = false 
         })
-        window.addEventListener('touchend', (e) => {
+        window.addEventListener('touchend', () => {
             pressed = false
         })
         slider.addEventListener('mousemove', (e) => {

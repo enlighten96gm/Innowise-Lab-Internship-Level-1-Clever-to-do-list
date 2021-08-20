@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import css from '../css-modules/register-page.module.css'
-
 
 const RegisterPage = (props) => {
     const {

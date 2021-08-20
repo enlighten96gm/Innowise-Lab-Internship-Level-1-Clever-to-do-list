@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import css from '../css-modules/create-task-page.module.css'
 import firebaseApi from '../utils/firebase-api'
 
-const SingleCreateTaskComponent = ({item, user, day, task, setRestore, restore}) => {
+const SingleCreateTaskComponent = ({
+item, user, day, task, setRestore, restore
+}) => {
     const handleDeleteTask = () => {
         firebaseApi.deleteTask(user, day, item)
         setRestore(restore += 'a')
@@ -23,8 +25,8 @@ const SingleCreateTaskComponent = ({item, user, day, task, setRestore, restore})
     return (
         <div className={css.task__container_task}>
             <div className={css.custom__checkbox__container}>
-                <input onClick={handleCheckboxSwitch} checked={Object.values(item[1][1])[0]} className={css.custom__checkbox} id={`checkbox${Object.values(item)[1]}`} type='checkbox' />
-                <label for={`checkbox${Object.values(item[1][1])[1]}`}></label>
+                <input onChange={handleCheckboxSwitch} checked={Object.values(item[1][1])[0]} className={css.custom__checkbox} id={`checkbox${Object.values(item)[1]}`} type='checkbox' />
+                <label htmlFor={`checkbox${Object.values(item[1][1])[1]}`} />
             </div>
             <div className={css.task__container_label}>{Object.values(item[1][1])[1]}</div>
             <div className={css.task__button_container}>

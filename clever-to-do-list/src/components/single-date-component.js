@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import css from '../css-modules/calendar-page.module.css'
 import SingleDotComponent from './single-dot-compinent'
 
-const SingleDateComponent = ({item, setDay, day, userInfo}) => {
+const SingleDateComponent = ({
+item, setDay, day, userInfo
+}) => {
     const dateToArray = item.split(' ')
     const active = {backgroundColor: 'red'}
     let [dotsArray, setDotsArray] = useState([])
