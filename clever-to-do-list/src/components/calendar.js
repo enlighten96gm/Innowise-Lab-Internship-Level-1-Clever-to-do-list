@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import css from '../css-modules/calendar-page.module.css'
 import getDate from '../functions/get-date'
+import LoaderComponent from './loader-component'
 import SingleDateComponent from './single-date-component'
 import SingleTaskComponent from './singleTaskComponent'
 
 const CalendarPage = ({
-logOutHandler, calendarTaskSwitcher, user, setDay, day, userInfo, tasksCount, checkArr, setRestore, restore
+logOutHandler, calendarTaskSwitcher, user, setDay, day, userInfo, tasksCount, checkArr, setRestore, restore, loader
 }) => {
     const [dateArray, setDateArray] = useState(getDate())
     let sliderState = {
@@ -74,7 +75,7 @@ pressed, startX, x, firstPos, dragged, currentPosition, firstTouch
                 </div>
                 <div className={css.task__container}>
                     <div className={css.task__container_text}>{tasksCount} Tasks Today?!</div>
-                    {singleTaskElement}
+                    {!loader ? singleTaskElement : <LoaderComponent />}
                 </div>
                     <div className={css.add__task_container}>
                         <div onClick={calendarTaskSwitcher} className={css.add__task_btn}>Add a New Task</div>

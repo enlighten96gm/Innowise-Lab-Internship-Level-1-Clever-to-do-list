@@ -28,6 +28,7 @@ const App = () => {
   const [tasksCount, setTasksCount] = useState(0)
   const [restore, setRestore] = useState('')
   let [checkArr, setCheckArr] = useState('')
+  const [loader, setLoader] = useState(false)
 
   const LoginRegisterSwitcher = () => {
     clearInput()
@@ -109,7 +110,7 @@ useEffect(() => {
   authObserver()
 }, [user])
 useEffect(() => {
-  firebaseApi.getData(user, setUserInfo)
+  firebaseApi.getData(user, setUserInfo, setLoader)
 }, [day, user, inputRender, restore])
 useEffect(() => {
   if (userInfo) {
@@ -179,6 +180,7 @@ useEffect(() => {
         checkArr={checkArr}
         setRestore={setRestore}
         restore={restore}
+        loader={loader}
         />
         :
         <CreateTaskPage

@@ -49,7 +49,9 @@ item, setDay, day, userInfo
 
     return (
         <div style={dateToArray[2] === day ? active : null} className={css.single}>
-            <div className={css.string__date}>{dateToArray[0]}</div>
+            <div className={css.string__date}>{dateToArray[0]}
+                <span className={css.span__date}>{dateToArray[1]}</span>
+            </div>
             <div className={css.number__date}>{dateToArray[2]}</div>
             <div className={css.task__dots}>{dotsArray}</div>
         </div>

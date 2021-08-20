@@ -125,5 +125,7 @@
     grid-template-columns: repeat(4, auto);
     justify-content: center;
 }
-
+.span__date {
+    font-size: 8px;
+}
 
