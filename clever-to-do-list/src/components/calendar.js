@@ -7,7 +7,6 @@ import SingleTaskComponent from './singleTaskComponent'
 const CalendarPage = ({
 logOutHandler, calendarTaskSwitcher, user, setDay, day, userInfo, tasksCount, checkArr, setRestore, restore
 }) => {
-    // console.log(checkArr);
     const [dateArray, setDateArray] = useState(getDate())
     let sliderState = {
         pressed: false,

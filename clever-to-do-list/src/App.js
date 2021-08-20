@@ -28,7 +28,6 @@ const App = () => {
   const [tasksCount, setTasksCount] = useState(0)
   const [restore, setRestore] = useState('')
   let [checkArr, setCheckArr] = useState('')
-  // const today = (new Date()).getDate()
 
   const LoginRegisterSwitcher = () => {
     clearInput()
@@ -115,7 +114,6 @@ useEffect(() => {
 useEffect(() => {
   if (userInfo) {
     for (let key of Object.entries(userInfo)) {
-      console.log(key, day);
       if (day === key[0]) {
           if (Object.keys(key[1]).length !== 0) setTasksCount(Object.keys(key[1]).length)
           for (let entries of Object.entries(key[1])) {

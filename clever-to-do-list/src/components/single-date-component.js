@@ -14,7 +14,7 @@ item, setDay, day, userInfo
             arr.push(Object.keys(argument).length + '+')
         } else {
             for (let value of Object.values(argument)) {
-                arr.push(<SingleDotComponent value={value}/>)
+                arr.push(<SingleDotComponent value={value} dotsArray={dotsArray}/>)
             }
         }
         return arr
