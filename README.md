@@ -10,3 +10,8 @@
 3. css-modules - styles folder
 4. functions - folder with a bit of a logic inside
 5. utils - firebase-api and routes files
+## Firebase structure
+![Screenshot from 2021-08-23 11-52-52](https://user-images.githubusercontent.com/73397043/130419486-e992b668-6462-4078-9c7c-1b097dcac146.png)
+1. user layer
+2. day layer
+3. task layer
