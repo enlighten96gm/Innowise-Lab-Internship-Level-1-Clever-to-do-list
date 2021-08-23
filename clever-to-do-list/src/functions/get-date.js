@@ -5,7 +5,7 @@ const getDate = (argument) => {
     const date = today.getDate();
     const days = []
 
-    for(var i = 0; i < argument; i += 1){
+    for(let i = 0; i < argument; i += 1){
         const singleDay = new Date(year, month, date + i)
         days.push(singleDay.toDateString())
     }
