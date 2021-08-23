@@ -3,7 +3,11 @@ import css from '../css-modules/calendar-page.module.css'
 import firebaseApi from '../utils/firebase-api';
 
 const SingleTaskComponent = ({
-item, user, day, setRestore, restore
+item, 
+user, 
+day, 
+setRestore, 
+restore
 }) => {
     const handleCheckboxSwitch = (e) => {
         if (e.target.checked === true) {
@@ -13,7 +17,6 @@ item, user, day, setRestore, restore
         }
         setRestore(restore += 'a')
     }
-    // не проходит рендер
     // скорее всего айдишнику нужно бдует задать еще и дополнительно значение конкретного дня иначе они совпадают и начинается мясо
     return (
         <div className={css.task__container_task}>

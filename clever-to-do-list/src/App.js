@@ -52,44 +52,11 @@ const App = () => {
     setPasswordError('')
   }
 const loginHandler = () => {
-  fireBase
-  .auth()
-  .signInWithEmailAndPassword(email, password)
-  .catch(err => {
-      switch (err.code) {
-          case "auth/invalid-email":
-          case "auth/user-disabled":
-          case "auth/user-not-found":
-              setEmailError(err.message)
-              break
-          case "auth/wrong-password":
-              setPasswordError(err.message)
-              break
-          default:
-              break;
-          
-      }
-  })
+  firebaseApi.setLogin(email, password, setEmailError, setPasswordError)
 }
 
 const RegisterHandler = () => {
-  fireBase
-  .auth()
-  .createUserWithEmailAndPassword(email, password)
-  .catch(err => {
-      switch (err.code) {
-          case "auth/email-already-in-use":
-          case "auth/invalid-email":
-              setEmailError(err.message)
-              break
-          case "auth/weak-password":
-              setPasswordError(err.message)
-              break
-          default:
-              break;
-          
-      }
-  })
+  firebaseApi.setRegister(email, password, setEmailError, setPasswordError)
 }
 
 const logOutHandler = () => {

@@ -4,7 +4,14 @@ import firebaseApi from '../utils/firebase-api'
 import SingleCreateTaskComponent from './single-create-task-component'
 
 const CreateTaskPage = ({
-calendarTaskSwitcher, user, day, setInputRender, tasksCount, setRestore, restore, checkArr
+calendarTaskSwitcher, 
+user, 
+day, 
+setInputRender, 
+tasksCount, 
+setRestore, 
+restore, 
+checkArr
 }) => {
     const [task, setTask] = useState('')
     const singleCreateTaskElement = checkArr.map(item => {

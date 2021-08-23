@@ -64,7 +64,7 @@ pressed, startX, x, firstPos, dragged, currentPosition, firstTouch
             } 
             if (innerSlider.getBoundingClientRect().right < -3850) {
                 setFlag(true)
-            } else  if (innerSlider.getBoundingClientRect().right < -3750) {
+            } else if (innerSlider.getBoundingClientRect().right < -3750) {
                 setFlag(false)
             }
         })

@@ -3,7 +3,10 @@ import css from '../css-modules/calendar-page.module.css'
 import SingleDotComponent from './single-dot-compinent'
 
 const SingleDateComponent = ({
-item, setDay, day, userInfo
+item, 
+setDay, 
+day, 
+userInfo
 }) => {
     const dateToArray = item.split(' ')
     const active = {backgroundColor: 'red'}

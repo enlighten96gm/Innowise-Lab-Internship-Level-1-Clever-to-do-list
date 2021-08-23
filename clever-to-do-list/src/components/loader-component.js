@@ -1,5 +1,6 @@
 import React from 'react'
 import css from '../css-modules/loader-component.module.css'
+
 const LoaderComponent = () => {
     return (
         <div className={css.container__loader}>

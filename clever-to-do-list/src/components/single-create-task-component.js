@@ -14,7 +14,6 @@ item, user, day, task, setRestore, restore
         setRestore(restore += 'a')
     }
     const handleCheckboxSwitch = (e) => {
-        // console.log(e.target.checked);
         if (e.target.checked === true) {
             firebaseApi.updateCheckbox(user, day, item, 'true')
         } else {
