@@ -6,10 +6,20 @@ import SingleDateComponent from './single-date-component'
 import SingleTaskComponent from './singleTaskComponent'
 
 const CalendarPage = ({
-logOutHandler, calendarTaskSwitcher, user, setDay, day, userInfo, tasksCount, checkArr, setRestore, restore, loader
+logOutHandler, 
+calendarTaskSwitcher, 
+user, 
+setDay, 
+day, 
+userInfo, 
+tasksCount, 
+checkArr, 
+setRestore, 
+restore, 
+loader
 }) => {
     const [dateArray, setDateArray] = useState(getDate(30))
-    const [flag, setFlag] = useState(false)
+    const [offsetFlag, setOffsetFlag] = useState(false)
     let sliderState = {
         pressed: false,
         startX: '',
@@ -29,12 +39,12 @@ pressed, startX, x, firstPos, dragged, currentPosition, firstTouch
         return <SingleTaskComponent key={index} item={item} user={user} day={day} setRestore={setRestore} restore={restore}/>
     })
     useEffect(() => {
-        if (flag) {
+        if (offsetFlag) {
             setDateArray(getDate(60))
         } else {
             setDateArray(getDate(30))
         }
-    }, [flag])
+    }, [offsetFlag])
     useEffect(() => {
         const slider = document.querySelector(`.${css.carousel}`)
         const innerSlider = document.querySelector(`.${css.inside__carousel}`)
@@ -63,9 +73,12 @@ pressed, startX, x, firstPos, dragged, currentPosition, firstTouch
                 innerSlider.style.left = '0px'
             } 
             if (innerSlider.getBoundingClientRect().right < -3850) {
-                setFlag(true)
+                setOffsetFlag(true)
             } else if (innerSlider.getBoundingClientRect().right < -3750) {
-                setFlag(false)
+                setOffsetFlag(false)
+            }
+            if (Number((innerSlider.style.left).split('px').join('')) < -9750) {
+                innerSlider.style.left = '-9750px'
             }
         })
         slider.addEventListener('touchmove', (e) => {
