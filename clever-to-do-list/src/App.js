@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
  BrowserRouter, Redirect, Route, Switch 
 } from 'react-router-dom'
-import './App.css';
 import CalendarPage from './components/calendar';
 import CreateTaskPage from './components/create-task-page';
 import LoginPage from './components/login-page';
@@ -10,8 +9,10 @@ import RegisterPage from './components/register-page';
 import fireBase from './fire';
 import firebaseApi from './utils/firebase-api';
 import {
- CALENDAR_ROUTE, CREATE_TASK_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE 
+  CALENDAR_ROUTE, CREATE_TASK_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE 
 } from './utils/routes';
+
+import './App.css';
 
 const App = () => {
   const [user, setUser] = useState('')

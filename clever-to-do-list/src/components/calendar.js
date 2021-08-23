@@ -32,11 +32,11 @@ loader
     let {
 pressed, startX, x, firstPos, dragged, currentPosition, firstTouch
 } = sliderState
-    const singleCalendarComponent = dateArray.map((item, index) => {
-        return <SingleDateComponent key={index} item={item} setDay={setDay} day={day} userInfo={userInfo}/>
+    const singleCalendarComponent = dateArray.map((item) => {
+        return <SingleDateComponent key={item} item={item} setDay={setDay} day={day} userInfo={userInfo}/>
     })
-    let singleTaskElement = checkArr.map((item, index) => {
-        return <SingleTaskComponent key={index} item={item} user={user} day={day} setRestore={setRestore} restore={restore}/>
+    let singleTaskElement = checkArr.map((item) => {
+        return <SingleTaskComponent key={item[0][1]} item={item} user={user} day={day} setRestore={setRestore} restore={restore}/>
     })
     useEffect(() => {
         if (offsetFlag) {

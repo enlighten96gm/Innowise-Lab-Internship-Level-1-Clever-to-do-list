@@ -32,7 +32,7 @@ checkArr
             <div className={css.wrapper}>
                 <div className={css.header}>
                     <div onClick={calendarTaskSwitcher} className={css.return} />
-                    <div className={css.header__text}>Today's Task. . .</div>
+                    <div className={css.header__text}>Todays Task. . .</div>
                 </div>
                 <div className={css.task__container}>
                     {singleCreateTaskElement}

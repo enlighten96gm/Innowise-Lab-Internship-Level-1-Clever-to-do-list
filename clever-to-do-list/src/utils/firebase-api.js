@@ -9,11 +9,11 @@ const firebaseApi = {
         return response
     },
     getData: async (user, setUserInfo, setLoader) => {
-        setLoader(true)
+        // setLoader(true)
         const response = await fireBase.database().ref().child(`${user.uid}`).once('value').then(function(task) {
             setUserInfo(task.val())
         })
-        setLoader(false)
+        // setLoader(false)
           return response
     },
     deleteTask: async (user, day, item) => {
