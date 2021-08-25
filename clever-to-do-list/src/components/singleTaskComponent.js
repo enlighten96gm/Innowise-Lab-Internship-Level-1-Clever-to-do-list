@@ -3,6 +3,8 @@ import css from '../css-modules/calendar-page.module.css';
 import firebaseApi from '../utils/firebase-api';
 
 const SingleTaskComponent = ({ item, user, day, setRestore, restore }) => {
+  const checkBoxValue = Object.values(item[1][1])[0];
+  const labelValue = Object.values(item[1][1])[1];
   const handleCheckboxSwitch = (e) => {
     if (e.target.checked === true) {
       firebaseApi.updateCheckbox(user, day, item, 'true');
@@ -17,14 +19,14 @@ const SingleTaskComponent = ({ item, user, day, setRestore, restore }) => {
       <div className={css.custom__checkbox__container}>
         <input
           onChange={handleCheckboxSwitch}
-          checked={Object.values(item[1][1])[0]}
+          checked={checkBoxValue}
           className={css.custom__checkbox}
-          id={`checkbox${Object.values(item[1][1])[1]}`}
+          id={`checkbox${labelValue}`}
           type="checkbox"
         />
-        <label htmlFor={`checkbox${Object.values(item[1][1])[1]}`} />
+        <label htmlFor={`checkbox${labelValue}`} />
       </div>
-      <div>{Object.values(item[1][1])[1]}</div>
+      <div>{labelValue}</div>
     </div>
   );
 };

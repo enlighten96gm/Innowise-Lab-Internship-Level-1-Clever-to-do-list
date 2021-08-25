@@ -3,6 +3,8 @@ import css from '../css-modules/create-task-page.module.css';
 import firebaseApi from '../utils/firebase-api';
 
 const SingleCreateTaskComponent = ({ item, user, day, task, setRestore, restore }) => {
+  const checkBoxValue = Object.values(item[1][1])[0];
+  const labelValue = Object.values(item[1][1])[1];
   const handleDeleteTask = () => {
     firebaseApi.deleteTask(user, day, item);
     setRestore((restore += 'a'));
@@ -24,14 +26,14 @@ const SingleCreateTaskComponent = ({ item, user, day, task, setRestore, restore 
       <div className={css.custom__checkbox__container}>
         <input
           onChange={handleCheckboxSwitch}
-          checked={Object.values(item[1][1])[0]}
+          checked={checkBoxValue}
           className={css.custom__checkbox}
-          id={`checkbox${Object.values(item)[1]}`}
+          id={`checkbox${labelValue}`}
           type="checkbox"
         />
-        <label htmlFor={`checkbox${Object.values(item[1][1])[1]}`} />
+        <label htmlFor={`checkbox${labelValue}`} />
       </div>
-      <div className={css.task__container_label}>{Object.values(item[1][1])[1]}</div>
+      <div className={css.task__container_label}>{labelValue}</div>
       <div className={css.task__button_container}>
         <div onClick={handleUpdateTask} className={css.task__container__update}>
           Update
