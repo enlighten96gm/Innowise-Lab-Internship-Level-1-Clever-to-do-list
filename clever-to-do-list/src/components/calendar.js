@@ -20,6 +20,7 @@ const CalendarPage = ({
 }) => {
   const [dateArray, setDateArray] = useState(getDate(30));
   const [offsetFlag, setOffsetFlag] = useState(false);
+  const [prevActiveElement, setPrevActiveElement] = useState(null);
   let sliderState = {
     pressed: false,
     startX: '',
@@ -32,7 +33,15 @@ const CalendarPage = ({
   let { pressed, startX, x, firstPos, dragged, currentPosition, firstTouch } = sliderState;
   const singleCalendarComponent = dateArray.map((item) => {
     return (
-      <SingleDateComponent key={item} item={item} setDay={setDay} day={day} userInfo={userInfo} />
+      <SingleDateComponent
+        key={item}
+        item={item}
+        setDay={setDay}
+        day={day}
+        userInfo={userInfo}
+        setPrevActiveElement={setPrevActiveElement}
+        prevActiveElement={prevActiveElement}
+      />
     );
   });
   let singleTaskElement = checkArr.map((item) => {

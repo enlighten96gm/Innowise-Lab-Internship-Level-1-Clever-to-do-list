@@ -1,11 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import css from '../css-modules/calendar-page.module.css';
 import SingleDotComponent from './single-dot-compinent';
 
-const SingleDateComponent = ({ item, setDay, day, userInfo }) => {
+const SingleDateComponent = ({
+  item,
+  setDay,
+  day,
+  userInfo,
+  setPrevActiveElement,
+  prevActiveElement,
+}) => {
   const dateToArray = item.split(' ');
   const active = { backgroundColor: 'red' };
   let [dotsArray, setDotsArray] = useState([]);
+  const calendarElement = useRef(null);
+  const onElementClick = () => {
+    if (prevActiveElement !== null) {
+      prevActiveElement.style.backgroundColor = 'blanchedalmond';
+    }
+    calendarElement.current.style.backgroundColor = 'red';
+    setPrevActiveElement(calendarElement.current);
+    const currentTargetDay = calendarElement.current.innerText.split('\n')[1];
+    setDay(currentTargetDay);
+  };
   const handleDotsCount = (argument) => {
     const arr = [];
     if (Object.keys(argument).length > 4) {
@@ -17,25 +34,6 @@ const SingleDateComponent = ({ item, setDay, day, userInfo }) => {
     }
     return arr;
   };
-
-  useEffect(() => {
-    const currentDay = document.querySelectorAll(`.${css.single}`);
-    const handleChosenDay = (e) => {
-      currentDay.forEach((item) => {
-        item.style.backgroundColor = 'blanchedalmond';
-      });
-      e.target.style.backgroundColor = 'red';
-      const currentTargetDay = e.target.innerText.split('\n')[1];
-      setDay(currentTargetDay);
-    };
-    currentDay.forEach((item) => {
-      item.addEventListener('click', handleChosenDay);
-    });
-    return () =>
-      currentDay.forEach((item) => {
-        item.removeEventListener('click', handleChosenDay);
-      });
-  });
   useEffect(() => {
     if (userInfo) {
       Object.entries(userInfo).forEach((item) => {
@@ -47,7 +45,12 @@ const SingleDateComponent = ({ item, setDay, day, userInfo }) => {
   }, [userInfo]);
 
   return (
-    <div style={dateToArray[2] === day ? active : null} className={css.single}>
+    <div
+      ref={calendarElement}
+      onClick={onElementClick}
+      style={dateToArray[2] === day ? active : null}
+      className={css.single}
+    >
       <div className={css.string__date}>
         {dateToArray[0]}
         <span className={css.span__date}>{dateToArray[1]}</span>
