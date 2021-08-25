@@ -29,18 +29,10 @@ const App = () => {
 
   const LoginRegisterSwitcher = () => {
     clearInput();
-    if (logInUp) {
-      setLogInUp(false);
-    } else {
-      setLogInUp(true);
-    }
+    setLogInUp((logInUp) => !logInUp);
   };
   const calendarTaskSwitcher = () => {
-    if (createTask) {
-      setCreateTask(false);
-    } else {
-      setCreateTask(true);
-    }
+    setCreateTask((createTask) => !createTask);
   };
   const clearInput = () => {
     setEmail('');
