@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import css from '../css-modules/create-task-page.module.css';
-import firebaseApi from '../utils/firebase-api';
-import SingleCreateTaskComponent from './single-create-task-component';
+import css from '../../css-modules/create-task-page.module.css';
+import firebaseApi from '../../utils/firebase-api';
+import SingleCreateTaskComponent from '../shared/single-create-task-component';
 
 const CreateTaskPage = ({
   calendarTaskSwitcher,

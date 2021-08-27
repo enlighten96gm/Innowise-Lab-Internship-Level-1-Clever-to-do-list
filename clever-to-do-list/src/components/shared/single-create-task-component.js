@@ -1,6 +1,6 @@
 import React from 'react';
-import css from '../css-modules/create-task-page.module.css';
-import firebaseApi from '../utils/firebase-api';
+import css from '../../css-modules/create-task-page.module.css';
+import firebaseApi from '../../utils/firebase-api';
 
 const SingleCreateTaskComponent = ({ item, user, day, task, setRestore, restore }) => {
   const checkBoxValue = Object.values(item[1][1])[0];

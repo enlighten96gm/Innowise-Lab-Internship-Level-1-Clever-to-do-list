@@ -1,17 +1,18 @@
 import React from 'react';
-import css from '../css-modules/login-page.module.css';
+import css from '../../css-modules/register-page.module.css';
 
-const LoginPage = (props) => {
+const RegisterPage = (props) => {
   const {
     LoginRegisterSwitcher,
     email,
     setEmail,
     password,
     setPassword,
-    loginHandler,
+    RegisterHandler,
     emailError,
     passwordError,
   } = props;
+
   return (
     <div className={css.main}>
       <div className={css.wrapper}>
@@ -36,11 +37,11 @@ const LoginPage = (props) => {
           <div className={css.error__message}>{passwordError}</div>
         </div>
         <div className={css.button__block}>
-          <div onClick={loginHandler} className={css.button__block__Login}>
-            <span>Log in</span>
+          <div onClick={RegisterHandler} className={css.button__block__Login}>
+            <span>Register</span>
           </div>
           <div onClick={LoginRegisterSwitcher} className={css.button__block__Register}>
-            Register?
+            Log in?
           </div>
         </div>
       </div>
@@ -48,4 +49,4 @@ const LoginPage = (props) => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import css from '../css-modules/calendar-page.module.css';
-import SingleDotComponent from './single-dot-compinent';
+import css from '../../css-modules/calendar-page.module.css';
+import SingleDotComponent from '../shared/single-dot-compinent';
 
 const SingleDateComponent = ({
   item,
@@ -9,6 +9,8 @@ const SingleDateComponent = ({
   userInfo,
   setPrevActiveElement,
   prevActiveElement,
+  setSingleComponentWidth,
+  singleComponentWidth,
 }) => {
   const dateToArray = item.split(' ');
   const active = { backgroundColor: 'red' };
@@ -34,6 +36,9 @@ const SingleDateComponent = ({
     }
     return arr;
   };
+  useEffect(() => {
+    setSingleComponentWidth((singleComponentWidth += calendarElement.current.offsetWidth + 15));
+  }, item);
   useEffect(() => {
     if (userInfo) {
       Object.entries(userInfo).forEach((item) => {

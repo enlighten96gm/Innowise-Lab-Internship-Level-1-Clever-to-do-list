@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import CalendarPage from './components/calendar';
-import CreateTaskPage from './components/create-task-page';
-import LoginPage from './components/login-page';
-import RegisterPage from './components/register-page';
+import CalendarPage from './components/pages/calendar';
+import CreateTaskPage from './components/pages/create-task-page';
+import LoginPage from './components/pages/login-page';
+import RegisterPage from './components/pages/register-page';
 import fireBase from './fire';
 import firebaseApi from './utils/firebase-api';
 import { CALENDAR_ROUTE, CREATE_TASK_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE } from './utils/routes';

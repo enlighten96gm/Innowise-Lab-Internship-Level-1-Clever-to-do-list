@@ -1,6 +1,6 @@
 import React from 'react';
-import css from '../css-modules/calendar-page.module.css';
-import firebaseApi from '../utils/firebase-api';
+import css from '../../css-modules/calendar-page.module.css';
+import firebaseApi from '../../utils/firebase-api';
 
 const SingleTaskComponent = ({ item, user, day, setRestore, restore }) => {
   const checkBoxValue = Object.values(item[1][1])[0];
