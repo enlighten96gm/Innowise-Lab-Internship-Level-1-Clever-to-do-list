@@ -9,8 +9,7 @@ const SingleDateComponent = ({
   userInfo,
   setPrevActiveElement,
   prevActiveElement,
-  setSingleComponentWidth,
-  singleComponentWidth,
+  setSingleElementWidth,
 }) => {
   const dateToArray = item.split(' ');
   const active = { backgroundColor: 'red' };
@@ -37,9 +36,7 @@ const SingleDateComponent = ({
     return arr;
   };
   useEffect(() => {
-    setSingleComponentWidth((singleComponentWidth += calendarElement.current.offsetWidth + 15));
-  }, item);
-  useEffect(() => {
+    setSingleElementWidth(calendarElement.current.offsetWidth);
     if (userInfo) {
       Object.entries(userInfo).forEach((item) => {
         if (item[0] === dateToArray[2]) {

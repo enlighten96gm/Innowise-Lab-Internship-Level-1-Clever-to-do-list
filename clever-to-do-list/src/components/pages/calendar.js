@@ -21,10 +21,10 @@ const CalendarPage = ({
   const [dateArray, setDateArray] = useState(getDate(30));
   const [offsetFlag, setOffsetFlag] = useState(false);
   const [prevActiveElement, setPrevActiveElement] = useState(null);
-  const [singleComponentWidth, setSingleComponentWidth] = useState(0);
   const [chosenDay, setChosenDay] = useState(
     dateArray[dateArray.length - 2] || dateArray[dateArray.length - 2]
   );
+  const [singleElementWidth, setSingleElementWidth] = useState(0);
   let sliderState = {
     pressed: false,
     startX: '',
@@ -45,8 +45,7 @@ const CalendarPage = ({
         userInfo={userInfo}
         setPrevActiveElement={setPrevActiveElement}
         prevActiveElement={prevActiveElement}
-        setSingleComponentWidth={setSingleComponentWidth}
-        singleComponentWidth={singleComponentWidth}
+        setSingleElementWidth={setSingleElementWidth}
       />
     );
   });
@@ -65,9 +64,9 @@ const CalendarPage = ({
   const sliderElement = useRef(null);
   const innerSliderElement = useRef(null);
   const handleMouseDown = (e) => {
-    if (e.target.innerText.split('\n').join('') === chosenDay.split(' ').splice(0, 3).join('')) {
-      setOffsetFlag(true);
-    }
+    // if (e.target.innerText.split('\n').join('') === chosenDay.split(' ').splice(0, 3).join('')) {
+    //   setOffsetFlag(true);
+    // }
     firstPos = e.pageX;
     pressed = true;
     startX = e.pageX - innerSliderElement.current.offsetLeft;
@@ -88,7 +87,18 @@ const CalendarPage = ({
     if (parseInt(innerSliderElement.current.style.left) > 0) {
       innerSliderElement.current.style.left = '0px';
     }
-    if (Number(innerSliderElement.current.style.left.split('px').join('')) < -9750) {
+    if (
+      Number(innerSliderElement.current.style.left.split('px').join('')) <
+      -singleElementWidth * 30
+    ) {
+      setOffsetFlag(true);
+    } else {
+      setOffsetFlag(false);
+    }
+    if (
+      Number(innerSliderElement.current.style.left.split('px').join('')) <
+      -singleElementWidth * 60
+    ) {
       innerSliderElement.current.style.left = '-9750px';
     }
   };
