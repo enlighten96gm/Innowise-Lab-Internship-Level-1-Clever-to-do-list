@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import css from '../../css-modules/calendar-page.module.css';
 import getDate from '../../functions/get-date';
+import { CREATE_TASK_ROUTE, LOGIN_ROUTE } from '../../utils/routes';
 import LoaderComponent from '../loader-component';
 import SingleDateComponent from '../shared/single-date-component';
 import SingleTaskComponent from '../shared/singleTaskComponent';
@@ -127,7 +129,7 @@ const CalendarPage = ({
         <div className={css.header}>
           <div>Tassker...</div>
           <div onClick={logOutHandler} className={css.signout__button}>
-            ...Sign Out
+            <NavLink to={LOGIN_ROUTE}>...Sign Out</NavLink>
           </div>
         </div>
         <div
@@ -148,7 +150,7 @@ const CalendarPage = ({
         </div>
         <div className={css.add__task_container}>
           <div onClick={calendarTaskSwitcher} className={css.add__task_btn}>
-            Add a New Task
+            <NavLink to={CREATE_TASK_ROUTE}>Add a New Task</NavLink>
           </div>
         </div>
       </div>

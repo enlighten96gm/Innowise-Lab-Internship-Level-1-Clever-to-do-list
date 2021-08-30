@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import css from '../../css-modules/create-task-page.module.css';
 import firebaseApi from '../../utils/firebase-api';
+import { CALENDAR_ROUTE } from '../../utils/routes';
 import SingleCreateTaskComponent from '../shared/single-create-task-component';
 
 const CreateTaskPage = ({
@@ -40,7 +42,9 @@ const CreateTaskPage = ({
     <div className={css.main}>
       <div className={css.wrapper}>
         <div className={css.header}>
-          <div onClick={calendarTaskSwitcher} className={css.return} />
+          <NavLink to={CALENDAR_ROUTE}>
+            <div onClick={calendarTaskSwitcher} className={css.return} />
+          </NavLink>
           <div className={css.header__text}>Today's Task. . .</div>
         </div>
         <div className={css.task__container}>{singleCreateTaskElement}</div>

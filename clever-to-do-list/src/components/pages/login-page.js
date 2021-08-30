@@ -1,5 +1,7 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import css from '../../css-modules/login-page.module.css';
+import { CALENDAR_ROUTE, REGISTER_ROUTE } from '../../utils/routes';
 
 const LoginPage = (props) => {
   const { LoginRegisterSwitcher, email, setEmail, password, setPassword, loginHandler } = props;
@@ -26,10 +28,12 @@ const LoginPage = (props) => {
         </div>
         <div className={css.button__block}>
           <div onClick={loginHandler} className={css.button__block__Login}>
-            <span>Log in</span>
+            <NavLink to={CALENDAR_ROUTE}>
+              <span>Log in</span>
+            </NavLink>
           </div>
           <div onClick={LoginRegisterSwitcher} className={css.button__block__Register}>
-            Register?
+            <NavLink to={REGISTER_ROUTE}>Register?</NavLink>
           </div>
         </div>
       </div>

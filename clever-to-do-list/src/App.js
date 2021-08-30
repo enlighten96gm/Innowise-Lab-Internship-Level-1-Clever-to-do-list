@@ -87,9 +87,9 @@ const App = () => {
         {user === '' ? (
           <Switch>
             <Route
-              path={logInUp === false ? LOGIN_ROUTE : REGISTER_ROUTE}
-              render={() =>
-                logInUp === false ? (
+              path={LOGIN_ROUTE}
+              render={() => {
+                return (
                   <LoginPage
                     LoginRegisterSwitcher={LoginRegisterSwitcher}
                     email={email}
@@ -98,7 +98,13 @@ const App = () => {
                     setPassword={setPassword}
                     loginHandler={loginHandler}
                   />
-                ) : (
+                );
+              }}
+            />
+            <Route
+              path={REGISTER_ROUTE}
+              render={() => {
+                return (
                   <RegisterPage
                     LoginRegisterSwitcher={LoginRegisterSwitcher}
                     email={email}
@@ -107,17 +113,17 @@ const App = () => {
                     setPassword={setPassword}
                     RegisterHandler={RegisterHandler}
                   />
-                )
-              }
+                );
+              }}
             />
-            <Redirect to={logInUp === false ? LOGIN_ROUTE : REGISTER_ROUTE} />
+            <Redirect to={logInUp ? LOGIN_ROUTE : REGISTER_ROUTE} />
           </Switch>
         ) : (
           <Switch>
             <Route
-              path={createTask === false ? CALENDAR_ROUTE : CREATE_TASK_ROUTE}
-              render={() =>
-                createTask === false ? (
+              path={CALENDAR_ROUTE}
+              render={() => {
+                return (
                   <CalendarPage
                     logOutHandler={logOutHandler}
                     calendarTaskSwitcher={calendarTaskSwitcher}
@@ -131,7 +137,13 @@ const App = () => {
                     restore={restore}
                     loader={loader}
                   />
-                ) : (
+                );
+              }}
+            />
+            <Route
+              path={CREATE_TASK_ROUTE}
+              render={() => {
+                return (
                   <CreateTaskPage
                     calendarTaskSwitcher={calendarTaskSwitcher}
                     user={user}
@@ -142,10 +154,10 @@ const App = () => {
                     restore={restore}
                     checkArr={checkArr}
                   />
-                )
-              }
+                );
+              }}
             />
-            <Redirect to={createTask === false ? CALENDAR_ROUTE : CREATE_TASK_ROUTE} />
+            <Redirect to={CALENDAR_ROUTE} />
           </Switch>
         )}
       </BrowserRouter>

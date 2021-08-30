@@ -21,3 +21,10 @@ body {
 .active {
   background-color: green;
 }
+a {
+  text-decoration: none;
+  color: black;
+}
+a:hover {
+  color: red;
+}
