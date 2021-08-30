@@ -9,6 +9,8 @@ import firebaseApi from './utils/firebase-api';
 import { CALENDAR_ROUTE, CREATE_TASK_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE } from './utils/routes';
 
 import './App.css';
+import NotificationComponent from './utils/notification';
+import errorsHandler from './utils/errors-handler';
 
 const App = () => {
   const [user, setUser] = useState('');
@@ -16,8 +18,6 @@ const App = () => {
   const [createTask, setCreateTask] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
   let [day, setDay] = useState(new Date().getDate(1).toString());
   const [userInfo, setUserInfo] = useState('');
   const [inputRender, setInputRender] = useState('');
@@ -26,6 +26,7 @@ const App = () => {
   const [restore, setRestore] = useState('');
   let [checkArr, setCheckArr] = useState('');
   const [loader, setLoader] = useState(false);
+  const [errorToast, setErrorMessage] = useState('');
 
   const LoginRegisterSwitcher = () => {
     clearInput();
@@ -37,14 +38,12 @@ const App = () => {
   const clearInput = () => {
     setEmail('');
     setPassword('');
-    setEmailError('');
-    setPasswordError('');
   };
   const loginHandler = () => {
-    firebaseApi.setLogin(email, password, setEmailError, setPasswordError);
+    errorsHandler(firebaseApi.setLogin(email, password), setErrorMessage);
   };
   const RegisterHandler = () => {
-    firebaseApi.setRegister(email, password, setEmailError, setPasswordError);
+    errorsHandler(firebaseApi.setRegister(email, password), setErrorMessage);
   };
   const logOutHandler = () => {
     fireBase.auth().signOut();
@@ -64,7 +63,7 @@ const App = () => {
   }, [user]);
   useEffect(() => {
     firebaseApi.getData(user, setUserInfo, setLoader);
-  }, [day, user, inputRender, restore]);
+  }, [day, user, inputRender, restore, errorToast]);
   useEffect(() => {
     if (userInfo) {
       for (let key of Object.entries(userInfo)) {
@@ -98,8 +97,6 @@ const App = () => {
                     password={password}
                     setPassword={setPassword}
                     loginHandler={loginHandler}
-                    emailError={emailError}
-                    passwordError={passwordError}
                   />
                 ) : (
                   <RegisterPage
@@ -109,8 +106,6 @@ const App = () => {
                     password={password}
                     setPassword={setPassword}
                     RegisterHandler={RegisterHandler}
-                    emailError={emailError}
-                    passwordError={passwordError}
                   />
                 )
               }
@@ -154,6 +149,9 @@ const App = () => {
           </Switch>
         )}
       </BrowserRouter>
+      {errorToast ? (
+        <NotificationComponent errorToast={errorToast} setErrorMessage={setErrorMessage} />
+      ) : null}
     </div>
   );
 };

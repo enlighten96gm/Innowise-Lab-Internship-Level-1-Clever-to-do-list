@@ -2,16 +2,7 @@ import React from 'react';
 import css from '../../css-modules/login-page.module.css';
 
 const LoginPage = (props) => {
-  const {
-    LoginRegisterSwitcher,
-    email,
-    setEmail,
-    password,
-    setPassword,
-    loginHandler,
-    emailError,
-    passwordError,
-  } = props;
+  const { LoginRegisterSwitcher, email, setEmail, password, setPassword, loginHandler } = props;
   return (
     <div className={css.main}>
       <div className={css.wrapper}>
@@ -23,7 +14,6 @@ const LoginPage = (props) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <div className={css.error__message}>{emailError}</div>
         </div>
         <div className={css.password__block}>
           <div className={css.password__block__text}>Password...</div>
@@ -33,7 +23,6 @@ const LoginPage = (props) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <div className={css.error__message}>{passwordError}</div>
         </div>
         <div className={css.button__block}>
           <div onClick={loginHandler} className={css.button__block__Login}>

@@ -1,0 +1,28 @@
+.main {
+    position: absolute;
+    background-color: white;
+    width: 800px;
+    text-align: center;
+    transform: translate(0px, -500px);
+    height: 100px;
+    border-radius: 14px;
+    animation: flow 1s forwards;
+}
+.error {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.close__btn {
+    cursor: pointer;
+}
+.close__btn:hover {
+    color: brown;
+}
+@keyframes flow {
+    0% {
+        transform: translate(0px, -600px);
+    }
+    100% {
+        transform: translate(0px, -400px);
+    }
+}

@@ -49,42 +49,13 @@ const firebaseApi = {
       });
     return response;
   },
-  setLogin: async (email, password, setEmailError, setPasswordError) => {
-    await fireBase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .catch((err) => {
-        switch (err.code) {
-          case 'auth/invalid-email':
-          case 'auth/user-disabled':
-          case 'auth/user-not-found':
-            setEmailError(err.message);
-            break;
-          case 'auth/wrong-password':
-            setPasswordError(err.message);
-            break;
-          default:
-            break;
-        }
-      });
+  setLogin: async (email, password) => {
+    const response = await fireBase.auth().signInWithEmailAndPassword(email, password);
+    return response;
   },
-  setRegister: async (email, password, setEmailError, setPasswordError) => {
-    await fireBase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .catch((err) => {
-        switch (err.code) {
-          case 'auth/email-already-in-use':
-          case 'auth/invalid-email':
-            setEmailError(err.message);
-            break;
-          case 'auth/weak-password':
-            setPasswordError(err.message);
-            break;
-          default:
-            break;
-        }
-      });
+  setRegister: async (email, password) => {
+    const response = await fireBase.auth().createUserWithEmailAndPassword(email, password);
+    return response;
   },
 };
 export default firebaseApi;

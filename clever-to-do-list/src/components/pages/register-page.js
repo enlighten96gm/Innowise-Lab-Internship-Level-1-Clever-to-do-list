@@ -2,16 +2,7 @@ import React from 'react';
 import css from '../../css-modules/register-page.module.css';
 
 const RegisterPage = (props) => {
-  const {
-    LoginRegisterSwitcher,
-    email,
-    setEmail,
-    password,
-    setPassword,
-    RegisterHandler,
-    emailError,
-    passwordError,
-  } = props;
+  const { LoginRegisterSwitcher, email, setEmail, password, setPassword, RegisterHandler } = props;
 
   return (
     <div className={css.main}>
@@ -24,7 +15,6 @@ const RegisterPage = (props) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <div className={css.error__message}>{emailError}</div>
         </div>
         <div className={css.password__block}>
           <div className={css.password__block__text}>Password...</div>
@@ -34,7 +24,6 @@ const RegisterPage = (props) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <div className={css.error__message}>{passwordError}</div>
         </div>
         <div className={css.button__block}>
           <div onClick={RegisterHandler} className={css.button__block__Login}>
