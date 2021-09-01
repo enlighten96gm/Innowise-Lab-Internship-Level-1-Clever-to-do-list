@@ -31,12 +31,12 @@ export type CalendarPageType = {
     logOutHandler: () => void
     calendarTaskSwitcher: () => void
     user: any
-    setDay: () => void
+    setDay: (value: string) => void
     day: string
-    userInfo: UserInfoType
+    userInfo: any
     tasksCount: number
     checkArr: checkArrayType
-    setRestore: () => void
+    setRestore: (value: string) => void
     restore: string
     loader: boolean
 }
@@ -46,7 +46,7 @@ export type CreateTaskPageType = {
     day: string
     setInputRender: (task: string) => void
     tasksCount: number
-    setRestore: () => void
+    setRestore: (value: string) => void
     restore: string
     checkArr: checkArrayType
 }
@@ -104,4 +104,12 @@ export type SingleTaskType = {
     day: string
     setRestore: (value: string) => void
     restore: string
+}
+export type UseLoaderType = {
+    loader: boolean
+    setLoader: (value: boolean) => void
+}
+export type SetDayType = {
+    day: string
+    setDay: (value: string) => void
 }

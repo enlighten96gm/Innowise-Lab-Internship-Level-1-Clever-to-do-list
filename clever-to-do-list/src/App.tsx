@@ -11,9 +11,10 @@ import { CALENDAR_ROUTE, CREATE_TASK_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE } from '
 import './App.css';
 import NotificationComponent from './utils/notification';
 import errorsHandler from './utils/errors-handler';
+import { checkArrayType, UseLoaderType } from './utils/types';
 
 const App = () => {
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState('') as any;
   const [logInUp, setLogInUp] = useState(false);
   const [createTask, setCreateTask] = useState(false);
   const [email, setEmail] = useState('');
@@ -21,11 +22,11 @@ const App = () => {
   let [day, setDay] = useState(new Date().getDate().toString());
   const [userInfo, setUserInfo] = useState('');
   const [inputRender, setInputRender] = useState('');
-  const currentTaskForDelete = [];
+  const currentTaskForDelete: checkArrayType = [];
   const [tasksCount, setTasksCount] = useState(0);
   const [restore, setRestore] = useState('');
-  let [checkArr, setCheckArr] = useState('');
-  const [loader, setLoader] = useState(false);
+  let [checkArr, setCheckArr] = useState('')as any;
+  const [loader, setLoader] = useState(false)as any;
   const [errorToast, setErrorMessage] = useState('');
 
   const LoginRegisterSwitcher = () => {
