@@ -2,6 +2,14 @@ type ObjectInArray = {
     checked: string
     task: string
 }
+type UserInfoType = {
+    '01': {
+        'task:0': {
+            checked: string
+            task: string
+        }
+    } 
+}
 export type checkArrayType = Array<Array<Array<string> | Array<ObjectInArray>>>
 export type LoginPageType = {
     LoginRegisterSwitcher: () => void
@@ -25,7 +33,7 @@ export type CalendarPageType = {
     user: any
     setDay: () => void
     day: string
-    userInfo: any
+    userInfo: UserInfoType
     tasksCount: number
     checkArr: checkArrayType
     setRestore: () => void
@@ -66,7 +74,7 @@ export type NotificationTypeComponent = {
     setErrorMessage: (value: string) => void
 }
 export type SingleCreateTaskType = {
-    item: any
+    item: Array<Array<string> | Array<ObjectInArray>>
     user: any
     day: string
     task: string
@@ -77,7 +85,7 @@ export type SingleDateType = {
     item: string
     setDay: (value: any) => void
     day: string
-    userInfo: any
+    userInfo: UserInfoType
     setPrevActiveElement: (value: any) => void
     prevActiveElement: any
     setSingleElementWidth: (value: any) => void

@@ -18,7 +18,7 @@ const App = () => {
   const [createTask, setCreateTask] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  let [day, setDay] = useState(new Date().getDate(1).toString());
+  let [day, setDay] = useState(new Date().getDate().toString());
   const [userInfo, setUserInfo] = useState('');
   const [inputRender, setInputRender] = useState('');
   const currentTaskForDelete = [];
