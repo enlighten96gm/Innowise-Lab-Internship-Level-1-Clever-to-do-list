@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import css from '../../css-modules/create-task-page.module.css';
 import firebaseApi from '../../utils/firebase-api';
+import { SingleCreateTaskType } from '../../utils/types';
 
-const SingleCreateTaskComponent = ({ item, user, day, task, setRestore, restore }) => {
-  const checkBoxValue = Object.values(item[1][1])[0];
-  const labelValue = Object.values(item[1][1])[1];
+const SingleCreateTaskComponent: React.FC<SingleCreateTaskType> = ({
+  item,
+  user,
+  day,
+  task,
+  setRestore,
+  restore,
+}) => {
+  const checkBoxValue: any = Object.values(item[1][1])[0];
+  const labelValue: any = Object.values(item[1][1])[1];
   const handleDeleteTask = () => {
     firebaseApi.deleteTask(user, day, item);
     setRestore((restore += 'a'));
@@ -13,7 +21,7 @@ const SingleCreateTaskComponent = ({ item, user, day, task, setRestore, restore 
     firebaseApi.updateTask(user, day, item, task);
     setRestore((restore += 'a'));
   };
-  const handleCheckboxSwitch = (e) => {
+  const handleCheckboxSwitch = (e: any) => {
     if (e.target.checked === true) {
       firebaseApi.updateCheckbox(user, day, item, 'true');
     } else {

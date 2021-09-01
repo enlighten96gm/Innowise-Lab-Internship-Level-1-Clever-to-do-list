@@ -1,5 +1,5 @@
-const errorsHandler = (response, setErrorMessage) => {
-  response.catch((err) => {
+const errorsHandler = (response: any, setErrorMessage: (err: string) => void) => {
+  response.catch((err: any) => {
     switch (err.code) {
       case 'auth/email-already-in-use':
       case 'auth/invalid-email':

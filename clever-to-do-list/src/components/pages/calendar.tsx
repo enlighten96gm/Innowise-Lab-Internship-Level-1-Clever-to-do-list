@@ -1,13 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { MouseEvent, useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import css from '../../css-modules/calendar-page.module.css';
 import getDate from '../../functions/get-date';
 import { CREATE_TASK_ROUTE, LOGIN_ROUTE } from '../../utils/routes';
+import { CalendarPageType, handlerType, SliderStateType } from '../../utils/types';
 import LoaderComponent from '../loader-component';
 import SingleDateComponent from '../shared/single-date-component';
 import SingleTaskComponent from '../shared/singleTaskComponent';
 
-const CalendarPage = ({
+const CalendarPage: React.FC<CalendarPageType> = ({
   logOutHandler,
   calendarTaskSwitcher,
   user,
@@ -23,11 +24,8 @@ const CalendarPage = ({
   const [dateArray, setDateArray] = useState(getDate(30));
   const [offsetFlag, setOffsetFlag] = useState(false);
   const [prevActiveElement, setPrevActiveElement] = useState(null);
-  const [chosenDay, setChosenDay] = useState(
-    dateArray[dateArray.length - 2] || dateArray[dateArray.length - 2]
-  );
   const [singleElementWidth, setSingleElementWidth] = useState(0);
-  let sliderState = {
+  let sliderState: SliderStateType = {
     pressed: false,
     startX: '',
     x: '',
@@ -36,7 +34,8 @@ const CalendarPage = ({
     currentPosition: '',
     firstTouch: '',
   };
-  let { pressed, startX, x, firstPos, dragged, currentPosition, firstTouch } = sliderState;
+  let { pressed, startX, x, firstPos, dragged, currentPosition, firstTouch }: SliderStateType =
+    sliderState;
   const singleCalendarComponent = dateArray.map((item) => {
     return (
       <SingleDateComponent
@@ -51,7 +50,7 @@ const CalendarPage = ({
       />
     );
   });
-  let singleTaskElement = checkArr.map((item) => {
+  let singleTaskElement = checkArr.map((item: any) => {
     return (
       <SingleTaskComponent
         key={item[0][1]}
@@ -64,33 +63,30 @@ const CalendarPage = ({
     );
   });
   const sliderElement = useRef(null);
-  const innerSliderElement = useRef(null);
-  const handleMouseDown = (e) => {
-    // if (e.target.innerText.split('\n').join('') === chosenDay.split(' ').splice(0, 3).join('')) {
-    //   setOffsetFlag(true);
-    // }
+  const innerSliderElement = useRef<HTMLDivElement | null>(null);
+  const handleMouseDown = (e: MouseEvent) => {
     firstPos = e.pageX;
     pressed = true;
-    startX = e.pageX - innerSliderElement.current.offsetLeft;
+    startX = e.pageX - innerSliderElement.current!.offsetLeft;
   };
-  const handleTouchStart = (e) => {
+  const handleTouchStart = (e: React.TouchEvent) => {
     pressed = true;
     firstTouch = e.touches[0].clientX;
-    startX = e.touches[0].clientX - innerSliderElement.current.offsetLeft;
+    startX = e.touches[0].clientX - innerSliderElement.current!.offsetLeft;
   };
   const handleMouseOut = () => {
     pressed = false;
   };
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: MouseEvent) => {
     dragged = true;
     if (!pressed) return;
     x = e.pageX;
-    innerSliderElement.current.style.left = `${x - startX}px`;
-    if (parseInt(innerSliderElement.current.style.left) > 0) {
-      innerSliderElement.current.style.left = '0px';
+    innerSliderElement.current!.style.left = `${x - startX}px`;
+    if (parseInt(innerSliderElement.current!.style.left) > 0) {
+      innerSliderElement.current!.style.left = '0px';
     }
     if (
-      Number(innerSliderElement.current.style.left.split('px').join('')) <
+      Number(innerSliderElement.current!.style.left.split('px').join('')) <
       -singleElementWidth * 30
     ) {
       setOffsetFlag(true);
@@ -98,16 +94,16 @@ const CalendarPage = ({
       setOffsetFlag(false);
     }
     if (
-      Number(innerSliderElement.current.style.left.split('px').join('')) <
+      Number(innerSliderElement.current!.style.left.split('px').join('')) <
       -singleElementWidth * 60
     ) {
-      innerSliderElement.current.style.left = '-9750px';
+      innerSliderElement.current!.style.left = '-9750px';
     }
   };
-  const handleTouchMove = (e) => {
+  const handleTouchMove = (e: React.TouchEvent) => {
     if (!pressed) return;
     currentPosition = e.touches[0].clientX;
-    innerSliderElement.current.style.left = `${currentPosition - startX}px`;
+    innerSliderElement.current!.style.left = `${currentPosition - startX}px`;
   };
   useEffect(() => {
     const handleMouseUpTwo = () => {
@@ -149,9 +145,9 @@ const CalendarPage = ({
           {!loader ? singleTaskElement : <LoaderComponent />}
         </div>
         <div className={css.add__task_container}>
-          <div onClick={calendarTaskSwitcher} className={css.add__task_btn}>
-            <NavLink to={CREATE_TASK_ROUTE}>Add a New Task</NavLink>
-          </div>
+          <NavLink to={CREATE_TASK_ROUTE} className={css.add__task_btn} onClick={calendarTaskSwitcher}>
+              Add a New Task
+          </NavLink>
         </div>
       </div>
     </div>

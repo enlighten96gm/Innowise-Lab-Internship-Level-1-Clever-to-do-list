@@ -1,6 +1,7 @@
+import { firebaseApiType } from './types';
 import fireBase from '../fire';
 
-const firebaseApi = {
+const firebaseApi: firebaseApiType = {
   addNewTask: async (user, day, tasksCount, task) => {
     const response = await fireBase
       .database()
@@ -12,7 +13,6 @@ const firebaseApi = {
     return response;
   },
   getData: async (user, setUserInfo, setLoader) => {
-    // setLoader(true)
     const response = await fireBase
       .database()
       .ref()
@@ -21,7 +21,6 @@ const firebaseApi = {
       .then(function (task) {
         setUserInfo(task.val());
       });
-    // setLoader(false)
     return response;
   },
   deleteTask: async (user, day, item) => {

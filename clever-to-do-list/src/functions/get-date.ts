@@ -1,4 +1,4 @@
-const getDate = (argument) => {
+const getDate = (argument: number) => {
   const today = new Date();
   const year = today.getFullYear();
   const month = today.getMonth();

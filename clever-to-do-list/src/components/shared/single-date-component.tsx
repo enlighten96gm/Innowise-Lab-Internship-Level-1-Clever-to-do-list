@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import css from '../../css-modules/calendar-page.module.css';
-import SingleDotComponent from '../shared/single-dot-compinent';
+import { SingleDateType } from '../../utils/types';
+import SingleDotComponent from './single-dot-compinent';
 
-const SingleDateComponent = ({
+const SingleDateComponent: React.FC<SingleDateType> = ({
   item,
   setDay,
   day,
@@ -12,9 +13,10 @@ const SingleDateComponent = ({
   setSingleElementWidth,
 }) => {
   const dateToArray = item.split(' ');
-  const active = { backgroundColor: 'red' };
-  let [dotsArray, setDotsArray] = useState([]);
-  const calendarElement = useRef(null);
+  const active: any = { backgroundColor: 'red' };
+  let [dotsArray, setDotsArray] = useState([]) as any;
+
+  const calendarElement: any = useRef(null);
   const onElementClick = () => {
     if (prevActiveElement !== null) {
       prevActiveElement.style.backgroundColor = 'blanchedalmond';
@@ -24,7 +26,7 @@ const SingleDateComponent = ({
     const currentTargetDay = calendarElement.current.innerText.split('\n')[1];
     setDay(currentTargetDay);
   };
-  const handleDotsCount = (argument) => {
+  const handleDotsCount = (argument: any) => {
     const arr = [];
     if (Object.keys(argument).length > 4) {
       arr.push(Object.keys(argument).length + '+');
@@ -45,6 +47,24 @@ const SingleDateComponent = ({
       });
     }
   }, [userInfo]);
+  useEffect(() => {
+    let checkCurrentDay;
+    if (day.split('').length === 1) {
+      checkCurrentDay = '0' + day;
+    } else {
+      checkCurrentDay = day;
+    }
+    if (
+      checkCurrentDay ===
+      calendarElement.current.innerText
+        .split('')
+        .splice(calendarElement.current.innerText.split('').length - 2, 2)
+        .join('')
+    ) {
+      calendarElement.current.style.backgroundColor = 'red';
+      setPrevActiveElement(calendarElement.current);
+    }
+  }, []);
 
   return (
     <div

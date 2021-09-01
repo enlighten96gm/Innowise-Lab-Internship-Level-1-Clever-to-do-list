@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react';
 import css from './notification.module.css';
-const NotificationComponent = ({ errorToast, setErrorMessage }) => {
+import { NotificationTypeComponent } from './types';
+const NotificationComponent: React.FC<NotificationTypeComponent> = ({
+  errorToast,
+  setErrorMessage,
+}) => {
   const handleCloseButton = () => {
     setErrorMessage('');
   };
   useEffect(() => {
     setTimeout(() => {
       setErrorMessage('');
-    }, 2000);
+    }, 3000);
   }, []);
   return (
     <div className={css.main}>

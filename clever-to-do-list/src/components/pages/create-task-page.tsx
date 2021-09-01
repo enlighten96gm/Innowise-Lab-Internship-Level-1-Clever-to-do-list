@@ -3,9 +3,10 @@ import { NavLink } from 'react-router-dom';
 import css from '../../css-modules/create-task-page.module.css';
 import firebaseApi from '../../utils/firebase-api';
 import { CALENDAR_ROUTE } from '../../utils/routes';
+import { CreateTaskPageType } from '../../utils/types';
 import SingleCreateTaskComponent from '../shared/single-create-task-component';
 
-const CreateTaskPage = ({
+const CreateTaskPage: React.FC<CreateTaskPageType> = ({
   calendarTaskSwitcher,
   user,
   day,
@@ -35,7 +36,7 @@ const CreateTaskPage = ({
       setInputRender(task);
     }
   };
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     setTask(e.target.value);
   };
   return (

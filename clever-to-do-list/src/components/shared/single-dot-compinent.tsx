@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { SingleDotType } from '../../utils/types';
 
-const SingleDotComponent = ({ value, dotsArray }) => {
+const SingleDotComponent: React.FC<SingleDotType> = ({ value, dotsArray }) => {
   const [ifActiveDotFlag, setIfActiveDotFlag] = useState(false);
   useEffect(() => {
     if (value.checked === '') {

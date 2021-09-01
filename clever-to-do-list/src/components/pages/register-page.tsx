@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import css from '../../css-modules/login-page.module.css';
-import { CALENDAR_ROUTE, REGISTER_ROUTE } from '../../utils/routes';
+import css from '../../css-modules/register-page.module.css';
+import { CALENDAR_ROUTE, LOGIN_ROUTE } from '../../utils/routes';
+import { RegisterPageType } from '../../utils/types';
 
-const LoginPage = (props) => {
-  const { LoginRegisterSwitcher, email, setEmail, password, setPassword, loginHandler } = props;
+const RegisterPage: React.FC<RegisterPageType> = (props) => {
+  const { LoginRegisterSwitcher, email, setEmail, password, setPassword, RegisterHandler } = props;
   return (
     <div className={css.main}>
       <div className={css.wrapper}>
@@ -27,13 +28,13 @@ const LoginPage = (props) => {
           />
         </div>
         <div className={css.button__block}>
-          <div onClick={loginHandler} className={css.button__block__Login}>
+          <div onClick={RegisterHandler} className={css.button__block__Login}>
             <NavLink to={CALENDAR_ROUTE}>
-              <span>Log in</span>
+              <span>Register</span>
             </NavLink>
           </div>
           <div onClick={LoginRegisterSwitcher} className={css.button__block__Register}>
-            <NavLink to={REGISTER_ROUTE}>Register?</NavLink>
+            <NavLink to={LOGIN_ROUTE}>Log in?</NavLink>
           </div>
         </div>
       </div>
@@ -41,4 +42,4 @@ const LoginPage = (props) => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
